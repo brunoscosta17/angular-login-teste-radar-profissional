@@ -1,5 +1,22 @@
 <h2>Lista de Usuários</h2>
 
-<table class="mat-elevation-z8">
-
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fullname</th>
+            <th scope="col">Email</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Telefone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of items">
+            <th scope="row">1</th>
+            <td>{{item.fullName}}</td>
+            <td>{{item.email}}</td>
+            <td>@{{item.cpf}}</td>
+            <td>@{{item.phone}}</td>
+        </tr>
+    </tbody>
 </table>

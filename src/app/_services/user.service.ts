@@ -8,10 +8,9 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     getHeader() {
-        let headers = new HttpHeaders();
-        let token = JSON.parse(localStorage.getItem('currentUser.data.access_token'));
-
-        headers.append('Authorization', 'Bearer ' + token);
+        let headers = new HttpHeaders({
+            'token': localStorage.getItem('access_token')
+        });
         return headers
     }
 

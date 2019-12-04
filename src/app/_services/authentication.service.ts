@@ -9,7 +9,7 @@ export class AuthenticationService {
     public currentUser: Observable<any>;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
+        this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('access_token')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
@@ -21,7 +21,6 @@ export class AuthenticationService {
         return this.http.post<any>(`http://api.template.megaleios.com/api/v1/Profile/Token`, { login, password })
             .pipe(map(user => {
                 console.log(user);
-                localStorage.setItem('currentUser', JSON.stringify(user));
                 localStorage.setItem('access_token', JSON.stringify(user.data.access_token));
                 this.currentUserSubject.next(user);
                 return user;
@@ -29,7 +28,7 @@ export class AuthenticationService {
     }
 
     logout() {
-        localStorage.removeItem('currentUser');
+        localStorage.removeItem('access_token');
         this.currentUserSubject.next(null);
     }
 }
