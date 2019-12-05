@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { UserService } from '../_services';
 
@@ -10,34 +9,31 @@ export interface ListUsers {
     phone: string;
 }
 
-const ELEMENT_DATA: ListUsers[] = [
-
-]
-
 @Component({
     templateUrl: 'list.component.html'
 })
 
-
 export class ListComponent implements OnInit {
 
+    items: any = [];
+
     constructor(
-        private router: Router,
         private userService: UserService
     ) { }
 
-    displayedColumns: string[] = ['fullName', 'email', 'cpf', 'phone'];
-    dataSource = ELEMENT_DATA;
-
-    ngOnInit() {
+    getUsers() {
         this.userService.getAllUsers()
-            .subscribe(
-                data => {
-                    console.log(data);
-                },
+            .subscribe(data => {
+                console.log('DATA', data);
+                this.items = data;
+            },
                 error => {
                     console.log(error);
                 });
+    }
+
+    ngOnInit() {
+        this.getUsers();
     }
 
 }

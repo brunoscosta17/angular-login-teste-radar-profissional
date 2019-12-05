@@ -9,8 +9,9 @@ export class UserService {
 
     getHeader() {
         let headers = new HttpHeaders({
-            'token': localStorage.getItem('access_token')
+            'Authorization': localStorage.getItem('access_token')
         });
+        console.log(headers);
         return headers
     }
 
